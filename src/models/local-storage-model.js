@@ -1,7 +1,7 @@
 import { Todo } from "./todo.js";
 import { Project } from "./project.js";
 
-export class PersistentModel {
+export class LocalStorageModel {
   constructor(storageKey = 'projects') {
     this.storageKey = storageKey;
     const projectsJson = localStorage.getItem(this.storageKey);
