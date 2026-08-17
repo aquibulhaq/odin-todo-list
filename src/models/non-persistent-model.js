@@ -25,7 +25,6 @@ export class NonPersistentModel {
       return;
     }
 
-    todo.projectId = projectId;
     project.put(todo);
   }
 

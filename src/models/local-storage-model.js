@@ -57,7 +57,6 @@ export class LocalStorageModel {
       return;
     }
 
-    todo.projectId = projectId;
     project.put(todo);
 
     this.saveAllProjects(projects);

@@ -18,6 +18,8 @@ export class Project {
   }
 
   put(newTodo) {
+    newTodo.projectId = this.id;
+
     const i = this.todos.findIndex(todo => todo.id === newTodo.id);
     if (i >= 0) {
       this.todos[i] = newTodo;
