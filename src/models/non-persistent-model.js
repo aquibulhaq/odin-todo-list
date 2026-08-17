@@ -11,7 +11,7 @@ export class NonPersistentModel {
     return this.projects.find(project => project.id === projectId);
   }
 
-  createProject(newProject) {
+  addProject(newProject) {
     this.projects.push(newProject);
   }
 

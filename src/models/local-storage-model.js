@@ -37,7 +37,7 @@ export class LocalStorageModel {
     return this.getAllProjects().find(project => project.id === projectId);
   }
 
-  createProject(newProject) {
+  addProject(newProject) {
     const projects = this.getAllProjects();
     projects.push(newProject);
     this.saveAllProjects(projects);
