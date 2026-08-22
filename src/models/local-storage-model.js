@@ -49,6 +49,19 @@ export class LocalStorageModel {
     this.saveAllProjects(projects);
   }
 
+  getAllTodos(projectId) {
+    return this.getProjectById(projectId)?.getAll();
+  }
+
+  getTodoById(projectId, todoId) {
+    const project = this.getProjectById(projectId);
+    if (project === undefined) {
+      return;
+    }
+
+    return project.getById(todoId);
+  }
+
   putTodo(projectId, todo) {
     const projects = this.getAllProjects();
 

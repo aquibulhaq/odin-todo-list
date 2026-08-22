@@ -19,6 +19,19 @@ export class NonPersistentModel {
     this.projects = this.projects.filter(project => project.id !== projectId);
   }
 
+  getAllTodos(projectId) {
+    return this.getProjectById(projectId)?.getAll();
+  }
+
+  getTodoById(projectId, todoId) {
+    const project = this.getProjectById(projectId);
+    if (project === undefined) {
+      return;
+    }
+
+    return project.getById(todoId);
+  }
+
   putTodo(projectId, todo) {
     const project = this.getProjectById(projectId);
     if (project === undefined) {
