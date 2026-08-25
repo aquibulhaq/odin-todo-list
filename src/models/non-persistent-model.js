@@ -3,6 +3,10 @@ export class NonPersistentModel {
     this.projects = projects;
   }
 
+  get size() {
+    return this.projects.length;
+  }
+
   getAllProjects() {
     return this.projects;
   }

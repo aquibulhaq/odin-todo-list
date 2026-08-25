@@ -10,6 +10,12 @@ export class LocalStorageModel {
     }
   }
 
+  get size() {
+    const projectsJson = localStorage.getItem(this.storageKey);
+    const projects = JSON.parse(projectsJson);
+    return projects.length;
+  }
+
   getAllProjects() {
     const projectsJson = localStorage.getItem(this.storageKey);
 
