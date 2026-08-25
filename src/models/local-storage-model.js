@@ -43,9 +43,16 @@ export class LocalStorageModel {
     return this.getAllProjects().find(project => project.id === projectId);
   }
 
-  addProject(newProject) {
+  putProject(newProject) {
     const projects = this.getAllProjects();
-    projects.push(newProject);
+
+    const i = projects.findIndex((project) => project.id === newProject.id);
+    if (i >= 0) {
+      projects[i].title = newProject.title;
+    } else {
+      projects.push(newProject);
+    }
+
     this.saveAllProjects(projects);
   }
 

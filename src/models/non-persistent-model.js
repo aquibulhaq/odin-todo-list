@@ -15,8 +15,13 @@ export class NonPersistentModel {
     return this.projects.find(project => project.id === projectId);
   }
 
-  addProject(newProject) {
-    this.projects.push(newProject);
+  putProject(newProject) {
+    const i = this.projects.findIndex((project) => project.id === newProject.id);
+    if (i >= 0) {
+      this.projects[i].title = newProject.title;
+    } else {
+      this.projects.push(newProject);
+    }
   }
 
   deleteProject(projectId) {
