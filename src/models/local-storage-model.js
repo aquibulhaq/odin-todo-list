@@ -57,8 +57,7 @@ export class LocalStorageModel {
   }
 
   deleteProject(projectId) {
-    const projects = this.getAllProjects();
-    projects = this.projects.filter(project => project.id !== projectId);
+    const projects = this.getAllProjects().filter((project) => project.id !== projectId);
     this.saveAllProjects(projects);
   }
 
