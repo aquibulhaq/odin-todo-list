@@ -338,3 +338,49 @@ footer {
 
   text-align: center;
 }
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-width: 500px;
+  text-align: center;
+}
+
+.form-title {
+  margin-bottom: 1.5rem;
+}
+
+.form-controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.25rem;
+  row-gap: 0.5rem;
+
+  margin-bottom: 1rem;
+}
+
+.form-controls :nth-child(2n) {
+  justify-self: start;
+}
+
+.form-controls>label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-controls>label::after {
+  content: ":";
+}
+
+.form-button-group svg {
+  display: inline;
+  width: 1em;
+  vertical-align: -2px;
+}
+
+.form-para {
+  margin-bottom: 1rem;
+}

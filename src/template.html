@@ -311,5 +311,163 @@
   <footer>
     &copy; 2025 Aquibul Haq Chowdhury
   </footer>
+
+  <dialog id="add-project-dialog">
+    <form id="add-project-form" method="dialog">
+      <h2 class="form-title">New Project</h2>
+
+      <div class="form-controls">
+        <label for="add-project-title">Title</label>
+        <input type="text" id="add-project-title" name="title" required>
+      </div>
+
+      <div class="form-button-group">
+        <button class="submit-button" type="submit" value="submit">
+          <%= require('@mdi/svg/svg/check.svg') %>
+          Submit
+        </button>
+        <button class="cancel-button" type="submit" value="cancel" formnovalidate>
+          <%= require('@mdi/svg/svg/cancel.svg') %>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="edit-project-dialog">
+    <form id="edit-project-form" method="dialog">
+      <input type="hidden" id="edit-project-id" name="id" value="">
+
+      <h2 class="form-title">Edit Project</h2>
+
+      <div class="form-controls">
+        <label for="edit-project-title">Title</label>
+        <input type="text" id="edit-project-title" name="title" required>
+      </div>
+
+      <div class="form-button-group">
+        <button class="submit-button" type="submit" value="submit">
+          <%= require('@mdi/svg/svg/check.svg') %>
+          Submit
+        </button>
+        <button class="cancel-button" type="submit" value="cancel" formnovalidate>
+          <%= require('@mdi/svg/svg/cancel.svg') %>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="delete-project-dialog">
+    <form id="delete-project-form" method="dialog">
+      <input type="hidden" id="delete-project-id" name="id" value="">
+
+      <h2 class="form-title">Delete Project</h2>
+
+      <p class="form-para">Are you sure you want to delete?</p>
+
+      <div class="form-button-group">
+        <button class="submit-button" type="submit" value="submit">
+          <%= require('@mdi/svg/svg/check.svg') %>
+          Submit
+        </button>
+        <button class="cancel-button" type="submit" value="cancel" formnovalidate>
+          <%= require('@mdi/svg/svg/cancel.svg') %>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="add-todo-dialog">
+    <form id="add-todo-form" method="dialog">
+      <h2 class="form-title">New Todo</h2>
+
+      <div class="form-controls">
+        <label for="add-todo-title">Title</label>
+        <input type="text" id="add-todo-title" name="title" required>
+
+        <label for="add-todo-description">Description</label>
+        <textarea id="add-todo-description" name="description"></textarea>
+
+        <label for="add-todo-due-date">Due Date</label>
+        <input type="datetime-local" id="add-todo-due-date" name="dueDate">
+
+        <label for="add-todo-priority">Priority</label>
+        <input type="number" id="add-todo-priority" name="priority" min="1" max="5">
+
+        <label for="add-todo-completed">Completed</label>
+        <input type="checkbox" id="add-todo-completed" name="completed">
+      </div>
+
+      <div class="form-button-group">
+        <button class="submit-button" type="submit" value="submit">
+          <%= require('@mdi/svg/svg/check.svg') %>
+          Submit
+        </button>
+        <button class="cancel-button" type="submit" value="cancel" formnovalidate>
+          <%= require('@mdi/svg/svg/cancel.svg') %>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="edit-todo-dialog">
+    <form id="edit-todo-form" method="dialog">
+      <input type="hidden" id="edit-todo-id" name="id" value="">
+
+      <h2 class="form-title">Edit Todo</h2>
+
+      <div class="form-controls">
+        <label for="edit-todo-title">Title</label>
+        <input type="text" id="edit-todo-title" name="title" required>
+
+        <label for="edit-todo-description">Description</label>
+        <textarea id="edit-todo-description" name="description"></textarea>
+
+        <label for="edit-todo-due-date">Due Date</label>
+        <input type="datetime-local" id="edit-todo-due-date" name="dueDate">
+
+        <label for="edit-todo-priority">Priority</label>
+        <input type="number" id="edit-todo-priority" name="priority" min="1" max="5">
+
+        <label for="edit-todo-completed">Completed</label>
+        <input type="checkbox" id="edit-todo-completed" name="completed">
+      </div>
+
+      <div class="form-button-group">
+        <button class="submit-button" type="submit" value="submit">
+          <%= require('@mdi/svg/svg/check.svg') %>
+          Submit
+        </button>
+        <button class="cancel-button" type="submit" value="cancel" formnovalidate>
+          <%= require('@mdi/svg/svg/cancel.svg') %>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="delete-todo-dialog">
+    <form id="delete-todo-form" method="dialog">
+      <input type="hidden" id="delete-todo-id" name="id" value="">
+
+      <h2 class="form-title">Delete Todo</h2>
+
+      <p class="form-para">Are you sure you want to delete?</p>
+
+      <div class="form-button-group">
+        <button class="submit-button" type="submit" value="submit">
+          <%= require('@mdi/svg/svg/check.svg') %>
+          Submit
+        </button>
+        <button class="cancel-button" type="submit" value="cancel" formnovalidate>
+          <%= require('@mdi/svg/svg/cancel.svg') %>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </dialog>
 </body>
 </html>
