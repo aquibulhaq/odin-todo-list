@@ -13,39 +13,297 @@
   <div class="sidebar">
     <div class="header-container">
       <h2>Projects</h2>
-      <button title="Add">Add</button>
+      <button class="round-button add-button" title="Add">
+        <%= require('@mdi/svg/svg/plus.svg') %>
+      </button>
     </div>
 
-    <ul>
-      <li><button>Final Exam</button></li>
-      <li><button>Thesis</button></li>
+    <ul class="project-list">
+      <li class="project-list-item">
+        <div class="project-button">
+          <div class="project-title">Final Exam</div>
+
+          <div class="actions project-actions">
+            <button class="round-button edit-button" title="Edit">
+              <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+            </button>
+            <button class="round-button delete-button" title="Delete">
+              <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+            </button>
+          </div>
+        </div>
+      </li>
+
+      <li class="project-list-item">
+        <div class="project-button">
+          <div class="project-title">Thesis</div>
+
+          <div class="actions project-actions">
+            <button class="round-button edit-button" title="Edit">
+              <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+            </button>
+            <button class="round-button delete-button" title="Delete">
+              <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+            </button>
+          </div>
+        </div>
+      </li>
+
+      <li class="project-list-item">
+        <div class="project-button">
+          <div class="project-title">Anim consectetur do anim sint aliquip eu minim sunt ex ullamco quis est.</div>
+
+          <div class="actions project-actions">
+            <button class="round-button edit-button" title="Edit">
+              <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+            </button>
+            <button class="round-button delete-button" title="Delete">
+              <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+            </button>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 
   <div class="content">
     <div class="header-container">
       <h2>Todos</h2>
-      <button title="Add">Add</button>
+      <button class="round-button add-button" title="Add">
+        <%= require('@mdi/svg/svg/plus.svg') %>
+      </button>
     </div>
 
-    <div class="todo">
-      <div class="header-container">
+    <div class="todo-list">
+      <div class="todo">
         <label class="todo-label">
-          <input type="checkbox" name="completed">
-          <h3>Study SVM</h3>
+          <input class="todo-completed" type="checkbox" name="completed">
+          <h3 class="todo-title">Study SVM</h3>
         </label>
-
-        <div class="button-container">
-          <button>Edit</button>
-          <button>Delete</button>
+        <div class="todo-statistics">
+          <div class="todo-rating">
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+          </div>
+          <div class="todo-due-date-container">
+            <%= require('@mdi/svg/svg/calendar.svg') %>
+            <p class="todo-due-date">11:59 am, June 13, 2025</p>
+          </div>
+        </div>
+        <p class="todo-description">
+          Deserunt reprehenderit magna magna dolore qui nostrud dolor commodo nostrud eiusmod ex minim do. Dolore elit
+          occaecat ullamco consectetur occaecat ipsum cillum. Eiusmod pariatur esse laborum nulla culpa cillum aute.
+          Nostrud cillum eu laboris ea consectetur duis commodo sit Lorem irure ut.
+        </p>
+        <div class="actions todo-actions">
+          <button class="round-button edit-button" title="Edit">
+            <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+          </button>
+          <button class="round-button delete-button" title="Delete">
+            <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+          </button>
         </div>
       </div>
 
-      <p>Learn linear and nonlinear kernels, gutters, etc.</p>
+      <div class="todo">
+        <label class="todo-label">
+          <input class="todo-completed" type="checkbox" name="completed">
+          <h3 class="todo-title">Study SVM</h3>
+        </label>
+        <div class="todo-statistics">
+          <div class="todo-rating">
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+          </div>
+          <div class="todo-due-date-container">
+            <%= require('@mdi/svg/svg/calendar.svg') %>
+            <p class="todo-due-date">11:59 am, June 13, 2025</p>
+          </div>
+        </div>
+        <p class="todo-description">
+          Deserunt reprehenderit magna magna dolore qui nostrud dolor commodo nostrud eiusmod ex minim do. Dolore elit
+          occaecat ullamco consectetur occaecat ipsum cillum. Eiusmod pariatur esse laborum nulla culpa cillum aute.
+          Nostrud cillum eu laboris ea consectetur duis commodo sit Lorem irure ut.
+        </p>
+        <div class="actions todo-actions">
+          <button class="round-button edit-button" title="Edit">
+            <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+          </button>
+          <button class="round-button delete-button" title="Delete">
+            <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+          </button>
+        </div>
+      </div>
 
-      <div class="rating-date-container">
-        <p>Rating: 5</p>
-        <p>Due Date: 11:59 am, June 13, 2025</p>
+      <div class="todo">
+        <label class="todo-label">
+          <input class="todo-completed" type="checkbox" name="completed">
+          <h3 class="todo-title">Study SVM</h3>
+        </label>
+        <div class="todo-statistics">
+          <div class="todo-rating">
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+          </div>
+          <div class="todo-due-date-container">
+            <%= require('@mdi/svg/svg/calendar.svg') %>
+            <p class="todo-due-date">11:59 am, June 13, 2025</p>
+          </div>
+        </div>
+        <p class="todo-description">
+          Deserunt reprehenderit magna magna dolore qui nostrud dolor commodo nostrud eiusmod ex minim do. Dolore elit
+          occaecat ullamco consectetur occaecat ipsum cillum. Eiusmod pariatur esse laborum nulla culpa cillum aute.
+          Nostrud cillum eu laboris ea consectetur duis commodo sit Lorem irure ut.
+        </p>
+        <div class="actions todo-actions">
+          <button class="round-button edit-button" title="Edit">
+            <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+          </button>
+          <button class="round-button delete-button" title="Delete">
+            <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+          </button>
+        </div>
+      </div>
+
+      <div class="todo">
+        <label class="todo-label">
+          <input class="todo-completed" type="checkbox" name="completed">
+          <h3 class="todo-title">Study SVM</h3>
+        </label>
+        <div class="todo-statistics">
+          <div class="todo-rating">
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+          </div>
+          <div class="todo-due-date-container">
+            <%= require('@mdi/svg/svg/calendar.svg') %>
+            <p class="todo-due-date">11:59 am, June 13, 2025</p>
+          </div>
+        </div>
+        <p class="todo-description">
+          Deserunt reprehenderit magna magna dolore qui nostrud dolor commodo nostrud eiusmod ex minim do. Dolore elit
+          occaecat ullamco consectetur occaecat ipsum cillum. Eiusmod pariatur esse laborum nulla culpa cillum aute.
+          Nostrud cillum eu laboris ea consectetur duis commodo sit Lorem irure ut.
+        </p>
+        <div class="actions todo-actions">
+          <button class="round-button edit-button" title="Edit">
+            <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+          </button>
+          <button class="round-button delete-button" title="Delete">
+            <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+          </button>
+        </div>
+      </div>
+
+      <div class="todo">
+        <label class="todo-label">
+          <input class="todo-completed" type="checkbox" name="completed">
+          <h3 class="todo-title">Study SVM</h3>
+        </label>
+        <div class="todo-statistics">
+          <div class="todo-rating">
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+          </div>
+          <div class="todo-due-date-container">
+            <%= require('@mdi/svg/svg/calendar.svg') %>
+            <p class="todo-due-date">11:59 am, June 13, 2025</p>
+          </div>
+        </div>
+        <p class="todo-description">
+          Deserunt reprehenderit magna magna dolore qui nostrud dolor commodo nostrud eiusmod ex minim do. Dolore elit
+          occaecat ullamco consectetur occaecat ipsum cillum. Eiusmod pariatur esse laborum nulla culpa cillum aute.
+          Nostrud cillum eu laboris ea consectetur duis commodo sit Lorem irure ut.
+        </p>
+        <div class="actions todo-actions">
+          <button class="round-button edit-button" title="Edit">
+            <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+          </button>
+          <button class="round-button delete-button" title="Delete">
+            <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+          </button>
+        </div>
+      </div>
+
+      <div class="todo">
+        <label class="todo-label">
+          <input class="todo-completed" type="checkbox" name="completed">
+          <h3 class="todo-title">Study SVM</h3>
+        </label>
+        <div class="todo-statistics">
+          <div class="todo-rating">
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+          </div>
+          <div class="todo-due-date-container">
+            <%= require('@mdi/svg/svg/calendar.svg') %>
+            <p class="todo-due-date">11:59 am, June 13, 2025</p>
+          </div>
+        </div>
+        <p class="todo-description">
+          Deserunt reprehenderit magna magna dolore qui nostrud dolor commodo nostrud eiusmod ex minim do. Dolore elit
+          occaecat ullamco consectetur occaecat ipsum cillum. Eiusmod pariatur esse laborum nulla culpa cillum aute.
+          Nostrud cillum eu laboris ea consectetur duis commodo sit Lorem irure ut.
+        </p>
+        <div class="actions todo-actions">
+          <button class="round-button edit-button" title="Edit">
+            <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+          </button>
+          <button class="round-button delete-button" title="Delete">
+            <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+          </button>
+        </div>
+      </div>
+
+      <div class="todo">
+        <label class="todo-label">
+          <input class="todo-completed" type="checkbox" name="completed">
+          <h3 class="todo-title">Study SVM</h3>
+        </label>
+        <div class="todo-statistics">
+          <div class="todo-rating">
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+            <%= require('@mdi/svg/svg/star-outline.svg') %>
+          </div>
+          <div class="todo-due-date-container">
+            <%= require('@mdi/svg/svg/calendar.svg') %>
+            <p class="todo-due-date">11:59 am, June 13, 2025</p>
+          </div>
+        </div>
+        <p class="todo-description">
+          Deserunt reprehenderit magna magna dolore qui nostrud dolor commodo nostrud eiusmod ex minim do. Dolore elit
+          occaecat ullamco consectetur occaecat ipsum cillum. Eiusmod pariatur esse laborum nulla culpa cillum aute.
+          Nostrud cillum eu laboris ea consectetur duis commodo sit Lorem irure ut.
+        </p>
+        <div class="actions todo-actions">
+          <button class="round-button edit-button" title="Edit">
+            <%= require('@mdi/svg/svg/file-edit-outline.svg') %>
+          </button>
+          <button class="round-button delete-button" title="Delete">
+            <%= require('@mdi/svg/svg/trash-can-outline.svg') %>
+          </button>
+        </div>
       </div>
     </div>
   </div>

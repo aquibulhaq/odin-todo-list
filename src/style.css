@@ -95,3 +95,246 @@ h6 {
 
   --font-system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
+body {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) 5fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header header'
+    'sidebar content'
+    'footer footer';
+
+  min-height: 100vh;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+
+  font-family: var(--font-system-ui);
+}
+
+svg {
+  fill: currentColor;
+}
+
+header {
+  grid-area: header;
+
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+  padding: 1rem;
+
+  text-align: center;
+}
+
+.sidebar {
+  grid-area: sidebar;
+
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+  padding: 1rem;
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.project-button {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  background: transparent;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.project-title {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.actions {
+  display: flex;
+  flex: none;
+
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project-button:hover,
+.project-button:focus {
+  background: rgb(255, 255, 255, 0.1);
+  border-color: var(--color-outline);
+}
+
+.project-button:active {
+  background: rgb(255, 255, 255, 0.2);
+}
+
+button {
+  cursor: pointer;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.round-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+}
+
+.add-button {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.add-button>svg {
+  width: 2rem;
+}
+
+.add-button:hover,
+.add-button:focus {
+  background-color: hsl(from var(--color-primary) h s calc(l - 10));
+}
+
+.add-button:active {
+  background-color: hsl(from var(--color-primary) h s calc(l - 20));
+}
+
+.content {
+  grid-area: content;
+
+  padding: 1rem;
+}
+
+.todo-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, auto));
+  grid-auto-rows: 270px;
+  gap: 1rem;
+}
+
+.todo {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    'completed title'
+    '. statistics'
+    '. description'
+    '. actions';
+  gap: 1rem 0.5rem;
+
+  background-color: var(--color-card);
+  padding: 1rem;
+
+  border: 2px solid var(--color-on-surface);
+  border-radius: 5px;
+  box-shadow: -4px 4px 5px var(--color-on-surface-variant);
+}
+
+.todo-label {
+  display: contents;
+}
+
+.todo-completed {
+  grid-area: completed;
+}
+
+.todo-title {
+  grid-area: title;
+}
+
+.todo-statistics {
+  grid-area: statistics;
+}
+
+.todo-statistics>div+div {
+  margin-top: 0.5rem;
+}
+
+.todo-actions {
+  grid-area: actions;
+  justify-content: flex-end;
+}
+
+.todo-rating,
+.todo-due-date-container {
+  display: flex;
+  color: var(--color-secondary);
+}
+
+.todo-due-date-container {
+  gap: 0.5rem;
+}
+
+.todo-rating>svg,
+.todo-due-date-container>svg {
+  width: 1.25rem;
+}
+
+.todo-description {
+  grid-area: description;
+  color: var(--color-on-surface-variant);
+  overflow: auto;
+}
+
+.edit-button,
+.delete-button {
+  background-color: var(--color-card);
+}
+
+.edit-button>svg,
+.delete-button>svg {
+  width: 1.5rem;
+}
+
+.edit-button:hover,
+.edit-button:focus {
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+}
+
+.edit-button:active {
+  background-color: hsl(from var(--color-secondary) h s calc(l + 10));
+}
+
+.delete-button:hover,
+.delete-button:focus {
+  background-color: var(--color-error);
+  color: var(--color-on-error);
+}
+
+.delete-button:active {
+  background-color: hsl(from var(--color-error) h s calc(l - 10));
+}
+
+footer {
+  grid-area: footer;
+
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+  padding: 0.5rem;
+
+  text-align: center;
+}
