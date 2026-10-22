@@ -71,3 +71,27 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+:root {
+  --color-surface: #f8f9fa;
+  --color-on-surface: #2b2d42;
+  --color-on-surface-variant: #6c757d;
+
+  --color-card: #fff;
+
+  --color-outline: #e9ecef;
+
+  --color-primary: #4361ee;
+  --color-on-primary: white;
+
+  --color-secondary: #3a0ca3;
+  --color-on-secondary: white;
+
+  --color-success: #4cc9f0;
+  --color-on-success: black;
+
+  --color-error: #dc3545;
+  --color-on-error: white;
+
+  --font-system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
