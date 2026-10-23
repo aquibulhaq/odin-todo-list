@@ -1,3 +1,8 @@
+import {
+  mdiFileEditOutline,
+  mdiTrashCanOutline,
+} from '@mdi/js';
+
 export class AppView {
   #projectList = document.querySelector('.project-list');
 
@@ -40,6 +45,66 @@ export class AppView {
     this.#deleteTodoBtns.forEach(button => {
       button.addEventListener('click', this.#showDeleteTodoDialog);
     });
+  }
+
+  showProjectList(projects) {
+    this.#projectList.textContent = '';
+
+    for (const project of projects) {
+      const projectListItem = document.createElement('li');
+      projectListItem.classList.add('project-list-item');
+
+      const projectButton = document.createElement('div');
+      projectButton.classList.add('project-button');
+
+      const projectTitle = document.createElement('div');
+      projectTitle.classList.add('project-title');
+      projectTitle.textContent = project.title;
+      projectButton.appendChild(projectTitle);
+
+      const projectActions = document.createElement('div');
+      projectActions.classList.add('actions');
+      projectActions.classList.add('project-actions');
+      projectActions.appendChild(AppView.#createEditButton(this.#showEditProjectDialog));
+      projectActions.appendChild(AppView.#createDeleteButton(this.#showDeleteProjectDialog));
+      projectButton.appendChild(projectActions);
+
+      projectListItem.appendChild(projectButton);
+      this.#projectList.appendChild(projectListItem);
+    }
+  }
+
+  static #createEditButton(onClick) {
+    const editButton = document.createElement('button');
+    editButton.classList.add('round-button');
+    editButton.classList.add('edit-button');
+    editButton.title = 'Edit';
+    editButton.appendChild(AppView.#createSvg(mdiFileEditOutline));
+    editButton.addEventListener('click', onClick);
+    return editButton;
+  }
+
+  static #createDeleteButton(onClick) {
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('round-button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.title = 'Delete';
+    deleteButton.appendChild(AppView.#createSvg(mdiTrashCanOutline));
+    deleteButton.addEventListener('click', onClick);
+    return deleteButton;
+  }
+
+  static #createSvg(path) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+
+    const pathElem = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    pathElem.setAttribute('d', path);
+    pathElem.setAttribute('fill', 'currentColor');
+    svg.appendChild(pathElem);
+
+    return svg;
   }
 
   #showAddProjectDialog = () => {
