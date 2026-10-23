@@ -172,7 +172,8 @@ header {
 }
 
 .project-button:hover,
-.project-button:focus {
+.project-button:focus,
+.project-button.selected {
   background: rgb(255, 255, 255, 0.1);
   border-color: var(--color-outline);
 }

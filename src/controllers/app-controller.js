@@ -11,7 +11,9 @@ export class AppController {
     }
 
     const projects = this.model.getAllProjects();
+    this.selectedProjectId = projects[0].id;
     this.view.showProjectList(projects);
+    this.view.setSelectedProject(this.selectedProjectId);
     this.view.showTodoList(projects[0].todos);
   }
 
@@ -36,5 +38,11 @@ export class AppController {
   deleteProject(project) {
     this.model.deleteProject(project);
     this.view.showProjectList(this.model.getAllProjects());
+  }
+
+  onProjectButtonClick(projectId) {
+    this.selectedProjectId = projectId;
+    this.view.setSelectedProject(this.selectedProjectId);
+    this.view.showTodoList(this.model.getAllTodos(this.selectedProjectId));
   }
 }

@@ -78,6 +78,8 @@ export class AppView {
 
       const projectButton = document.createElement('div');
       projectButton.classList.add('project-button');
+      projectButton.dataset.id = project.id;
+      projectButton.addEventListener('click', this.#onProjectButtonClick);
 
       const projectTitle = document.createElement('div');
       projectTitle.classList.add('project-title');
@@ -94,6 +96,12 @@ export class AppView {
       projectListItem.appendChild(projectButton);
       this.#projectList.appendChild(projectListItem);
     }
+  }
+
+  setSelectedProject(projectId) {
+    document.querySelectorAll('.project-button').forEach((element) => {
+      element.classList.toggle('selected', element.dataset.id === projectId);
+    });
   }
 
   showTodoList(todos) {
@@ -249,6 +257,10 @@ export class AppView {
 
     this.#deleteProjectForm.reset();
     this.#deleteProjectTitle.textContent = '';
+  }
+
+  #onProjectButtonClick = (event) => {
+    this.controller.onProjectButtonClick(event.currentTarget.dataset.id);
   }
 
   #showAddTodoDialog = () => {
