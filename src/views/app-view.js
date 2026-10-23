@@ -14,6 +14,9 @@ export class AppView {
 
   #deleteProjectBtns = document.querySelectorAll('.sidebar .delete-button');
   #deleteProjectDialog = document.getElementById('delete-project-dialog');
+  #deleteProjectForm = document.getElementById('delete-project-form');
+  #deleteProjectId = document.getElementById('delete-project-id');
+  #deleteProjectTitle = document.getElementById('delete-project-title');
 
   #addTodoBtn = document.querySelector('.content .add-button');
   #addTodoDialog = document.getElementById('add-todo-dialog');
@@ -35,8 +38,9 @@ export class AppView {
       button.addEventListener('click', this.#showEditProjectDialog);
     });
     this.#deleteProjectBtns.forEach((button) => {
-      button.addEventListener('click', this.#showDeleteProjectDialog);
+      button.addEventListener('click', this.#onDeleteProjectButtonClick);
     });
+    this.#deleteProjectDialog.addEventListener('close', this.#onDeleteProjectDialogClose);
 
     this.#addTodoBtn.addEventListener('click', this.#showAddTodoDialog);
     this.#editTodoBtns.forEach((button) => {
@@ -66,7 +70,7 @@ export class AppView {
       projectActions.classList.add('actions');
       projectActions.classList.add('project-actions');
       projectActions.appendChild(AppView.#createEditButton(this.#showEditProjectDialog));
-      projectActions.appendChild(AppView.#createDeleteButton(this.#showDeleteProjectDialog));
+      projectActions.appendChild(AppView.#createDeleteButton(project.id, this.#onDeleteProjectButtonClick));
       projectButton.appendChild(projectActions);
 
       projectListItem.appendChild(projectButton);
@@ -84,12 +88,13 @@ export class AppView {
     return editButton;
   }
 
-  static #createDeleteButton(onClick) {
+  static #createDeleteButton(id, onClick) {
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('round-button');
     deleteButton.classList.add('delete-button');
     deleteButton.title = 'Delete';
     deleteButton.appendChild(AppView.#createSvg(mdiTrashCanOutline));
+    deleteButton.dataset.id = id;
     deleteButton.addEventListener('click', onClick);
     return deleteButton;
   }
@@ -115,8 +120,24 @@ export class AppView {
     this.#editProjectDialog.showModal();
   }
 
-  #showDeleteProjectDialog = () => {
+  #onDeleteProjectButtonClick = (event) => {
+    this.controller.onDeleteProjectButtonClick(event.currentTarget.dataset.id);
+  }
+
+  showDeleteProjectDialog = (project) => {
+    this.#deleteProjectDialog.returnValue = '';
+    this.#deleteProjectId.value = project.id;
+    this.#deleteProjectTitle.textContent = project.title;
     this.#deleteProjectDialog.showModal();
+  }
+
+  #onDeleteProjectDialogClose = () => {
+    if (this.#deleteProjectDialog.returnValue === 'submit') {
+      this.controller.deleteProject(this.#deleteProjectId.value);
+    }
+
+    this.#deleteProjectForm.reset();
+    this.#deleteProjectTitle.textContent = '';
   }
 
   #showAddTodoDialog = () => {

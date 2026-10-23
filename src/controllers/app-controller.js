@@ -12,4 +12,13 @@ export class AppController {
 
     this.view.showProjectList(this.model.getAllProjects());
   }
+
+  onDeleteProjectButtonClick(projectId) {
+    this.view.showDeleteProjectDialog(this.model.getProjectById(projectId));
+  }
+
+  deleteProject(projectId) {
+    this.model.deleteProject(projectId);
+    this.view.showProjectList(this.model.getAllProjects());
+  }
 }
