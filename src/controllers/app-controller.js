@@ -10,7 +10,9 @@ export class AppController {
       this.model.putProject(new Project({ title: 'Default' }));
     }
 
-    this.view.showProjectList(this.model.getAllProjects());
+    const projects = this.model.getAllProjects();
+    this.view.showProjectList(projects);
+    this.view.showTodoList(projects[0].todos);
   }
 
   addProject(project) {

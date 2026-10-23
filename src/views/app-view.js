@@ -4,7 +4,10 @@ import {
   parseISO,
 } from 'date-fns';
 import {
+  mdiCalendar,
   mdiFileEditOutline,
+  mdiStar,
+  mdiStarOutline,
   mdiTrashCanOutline,
 } from '@mdi/js';
 
@@ -12,6 +15,7 @@ import { Project } from '../models/project';
 
 export class AppView {
   #projectList = document.querySelector('.project-list');
+  #todoList = document.querySelector('.todo-list');
 
   #addProjectBtn = document.querySelector('.sidebar .add-button');
   #addProjectDialog = document.getElementById('add-project-dialog');
@@ -89,6 +93,73 @@ export class AppView {
 
       projectListItem.appendChild(projectButton);
       this.#projectList.appendChild(projectListItem);
+    }
+  }
+
+  showTodoList(todos) {
+    this.#todoList.textContent = '';
+
+    for (const todo of todos) {
+      const todoDiv = document.createElement('div');
+      todoDiv.classList.add('todo');
+
+      const todoLabel = document.createElement('label');
+      todoLabel.classList.add('todo-label');
+
+      const todoCompleted = document.createElement('input');
+      todoCompleted.type = 'checkbox';
+      todoCompleted.classList.add('todo-completed');
+      todoCompleted.name = 'completed';
+      todoCompleted.checked = todo.completed;
+      todoLabel.appendChild(todoCompleted);
+
+      const todoTitle = document.createElement('h3');
+      todoTitle.classList.add('todo-title');
+      todoTitle.textContent = todo.title;
+      todoLabel.appendChild(todoTitle);
+      todoDiv.appendChild(todoLabel);
+
+      const todoStatistics = document.createElement('div');
+      todoStatistics.classList.add('todo-statistics');
+
+      const todoRating = document.createElement('div');
+      todoRating.classList.add('todo-rating');
+
+      for (let i = 0; i < todo.priority; ++i) {
+        todoRating.appendChild(AppView.#createSvg(mdiStar));
+      }
+      for (let i = todo.priority; i < 5; ++i) {
+        todoRating.appendChild(AppView.#createSvg(mdiStarOutline));
+      }
+
+      todoStatistics.appendChild(todoRating);
+
+      const todoDueDateContainer = document.createElement('div');
+      todoDueDateContainer.classList.add('todo-due-date-container');
+      todoDueDateContainer.appendChild(AppView.#createSvg(mdiCalendar));
+
+      const todoDueDate = document.createElement('p');
+      todoDueDate.classList.add('todo-due-date');
+      todoDueDate.textContent = format(todo.dueDate, 'h:mm aaa, MMMM d, yyyy');
+      todoDueDateContainer.appendChild(todoDueDate);
+
+      todoStatistics.appendChild(todoDueDateContainer);
+      todoDiv.appendChild(todoStatistics);
+
+      const todoDescription = document.createElement('p');
+      todoDescription.classList.add('todo-description');
+      todoDescription.textContent = todo.description;
+      todoDiv.appendChild(todoDescription);
+
+      const todoActions = document.createElement('div');
+      todoActions.classList.add('actions');
+      todoActions.classList.add('todo-actions');
+
+      todoActions.appendChild(AppView.#createEditButton(todo.id, this.#onEditTodoButtonClick));
+      todoActions.appendChild(AppView.#createDeleteButton(todo.id, this.#onDeleteTodoButtonClick));
+      todoDiv.appendChild(todoActions);
+
+      this.#todoList.appendChild(todoDiv);
     }
   }
 
@@ -184,8 +255,14 @@ export class AppView {
     this.#addTodoDialog.showModal();
   }
 
+  #onEditTodoButtonClick = (event) => {
+  }
+
   #showEditTodoDialog = () => {
     this.#editTodoDialog.showModal();
+  }
+
+  #onDeleteTodoButtonClick = (event) => {
   }
 
   #showDeleteTodoDialog = () => {
