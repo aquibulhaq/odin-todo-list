@@ -1,13 +1,19 @@
 import {
+  parseISO,
+} from 'date-fns';
+import {
   mdiFileEditOutline,
   mdiTrashCanOutline,
 } from '@mdi/js';
+
+import { Project } from '../models/project';
 
 export class AppView {
   #projectList = document.querySelector('.project-list');
 
   #addProjectBtn = document.querySelector('.sidebar .add-button');
   #addProjectDialog = document.getElementById('add-project-dialog');
+  #addProjectForm = document.getElementById('add-project-form');
 
   #editProjectBtns = document.querySelectorAll('.sidebar .edit-button');
   #editProjectDialog = document.getElementById('edit-project-dialog');
@@ -34,6 +40,7 @@ export class AppView {
 
   #setEventListeners() {
     this.#addProjectBtn.addEventListener('click', this.#showAddProjectDialog);
+    this.#addProjectDialog.addEventListener('close', this.#onAddProjectDialogClose);
     this.#editProjectBtns.forEach((button) => {
       button.addEventListener('click', this.#showEditProjectDialog);
     });
@@ -113,7 +120,17 @@ export class AppView {
   }
 
   #showAddProjectDialog = () => {
+    this.#addProjectDialog.returnValue = '';
     this.#addProjectDialog.showModal();
+  }
+
+  #onAddProjectDialogClose = () => {
+    if (this.#addProjectDialog.returnValue === 'submit') {
+      const project = new Project(AppView.#getFormValues(this.#addProjectForm));
+      this.controller.addProject(project);
+    }
+
+    this.#addProjectForm.reset();
   }
 
   #showEditProjectDialog = () => {
@@ -150,5 +167,48 @@ export class AppView {
 
   #showDeleteTodoDialog = () => {
     this.#deleteTodoDialog.showModal();
+  }
+
+  static #getFormValues(form) {
+    const values = {};
+
+    for (const el of form.elements) {
+      if (!el.name || el.disabled) {
+        continue;
+      }
+
+      switch (el.type) {
+        case 'submit':
+        case 'button':
+        case 'reset':
+          break;
+
+        case 'checkbox':
+          values[el.name] = el.checked;
+          break;
+
+        case 'number':
+          if (el.value !== '') {
+            values[el.name] = el.valueAsNumber;
+          }
+          break;
+
+        case 'datetime-local':
+          if (el.value !== '') {
+            values[el.name] = parseISO(el.value);
+          }
+          break;
+
+        default: {
+          const trimmed = el.value.trim();
+          if (trimmed !== '') {
+            values[el.name] = trimmed;
+          }
+          break;
+        }
+      }
+    }
+
+    return values;
   }
 }
