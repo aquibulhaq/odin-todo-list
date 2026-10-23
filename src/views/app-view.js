@@ -39,6 +39,9 @@ export class AppView {
 
   #deleteTodoBtns = document.querySelectorAll('.content .delete-button');
   #deleteTodoDialog = document.getElementById('delete-todo-dialog');
+  #deleteTodoForm = document.getElementById('delete-todo-form');
+  #deleteTodoId = document.getElementById('delete-todo-id');
+  #deleteTodoTitle = document.getElementById('delete-todo-title');
 
   constructor(controller) {
     this.controller = controller;
@@ -64,9 +67,11 @@ export class AppView {
     this.#editTodoBtns.forEach((button) => {
       button.addEventListener('click', this.#showEditTodoDialog);
     });
+
     this.#deleteTodoBtns.forEach(button => {
-      button.addEventListener('click', this.#showDeleteTodoDialog);
+      button.addEventListener('click', this.#onDeleteTodoButtonClick);
     });
+    this.#deleteTodoDialog.addEventListener('close', this.#onDeleteTodoDialogClose);
   }
 
   showProjectList(projects) {
@@ -275,10 +280,23 @@ export class AppView {
   }
 
   #onDeleteTodoButtonClick = (event) => {
+    this.controller.onDeleteTodoButtonClick(event.currentTarget.dataset.id);
   }
 
-  #showDeleteTodoDialog = () => {
+  showDeleteTodoDialog = (todo) => {
+    this.#deleteTodoDialog.returnValue = '';
+    this.#deleteTodoId.value = todo.id;
+    this.#deleteTodoTitle.textContent = todo.title;
     this.#deleteTodoDialog.showModal();
+  }
+
+  #onDeleteTodoDialogClose = () => {
+    if (this.#deleteTodoDialog.returnValue === 'submit') {
+      this.controller.deleteTodo(this.#deleteTodoId.value);
+    }
+
+    this.#deleteTodoForm.reset();
+    this.#deleteTodoTitle.textContent = '';
   }
 
   static #getFormValues(form) {

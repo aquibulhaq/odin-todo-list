@@ -45,4 +45,13 @@ export class AppController {
     this.view.setSelectedProject(this.selectedProjectId);
     this.view.showTodoList(this.model.getAllTodos(this.selectedProjectId));
   }
+
+  onDeleteTodoButtonClick(todoId) {
+    this.view.showDeleteTodoDialog(this.model.getTodoById(this.selectedProjectId, todoId));
+  }
+
+  deleteTodo(todoId) {
+    this.model.deleteTodo(this.selectedProjectId, todoId);
+    this.view.showTodoList(this.model.getAllTodos(this.selectedProjectId));
+  }
 }
