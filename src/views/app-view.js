@@ -1,4 +1,6 @@
 import {
+  format,
+  isValid,
   parseISO,
 } from 'date-fns';
 import {
@@ -17,6 +19,7 @@ export class AppView {
 
   #editProjectBtns = document.querySelectorAll('.sidebar .edit-button');
   #editProjectDialog = document.getElementById('edit-project-dialog');
+  #editProjectForm = document.getElementById('edit-project-form');
 
   #deleteProjectBtns = document.querySelectorAll('.sidebar .delete-button');
   #deleteProjectDialog = document.getElementById('delete-project-dialog');
@@ -41,13 +44,17 @@ export class AppView {
   #setEventListeners() {
     this.#addProjectBtn.addEventListener('click', this.#showAddProjectDialog);
     this.#addProjectDialog.addEventListener('close', this.#onAddProjectDialogClose);
+
     this.#editProjectBtns.forEach((button) => {
-      button.addEventListener('click', this.#showEditProjectDialog);
+      button.addEventListener('click', this.#onEditProjectButtonClick);
     });
+    this.#editProjectDialog.addEventListener('close', this.#onEditProjectDialogClose);
+
     this.#deleteProjectBtns.forEach((button) => {
       button.addEventListener('click', this.#onDeleteProjectButtonClick);
     });
     this.#deleteProjectDialog.addEventListener('close', this.#onDeleteProjectDialogClose);
+
 
     this.#addTodoBtn.addEventListener('click', this.#showAddTodoDialog);
     this.#editTodoBtns.forEach((button) => {
@@ -76,7 +83,7 @@ export class AppView {
       const projectActions = document.createElement('div');
       projectActions.classList.add('actions');
       projectActions.classList.add('project-actions');
-      projectActions.appendChild(AppView.#createEditButton(this.#showEditProjectDialog));
+      projectActions.appendChild(AppView.#createEditButton(project.id, this.#onEditProjectButtonClick));
       projectActions.appendChild(AppView.#createDeleteButton(project.id, this.#onDeleteProjectButtonClick));
       projectButton.appendChild(projectActions);
 
@@ -85,12 +92,13 @@ export class AppView {
     }
   }
 
-  static #createEditButton(onClick) {
+  static #createEditButton(id, onClick) {
     const editButton = document.createElement('button');
     editButton.classList.add('round-button');
     editButton.classList.add('edit-button');
     editButton.title = 'Edit';
     editButton.appendChild(AppView.#createSvg(mdiFileEditOutline));
+    editButton.dataset.id = id;
     editButton.addEventListener('click', onClick);
     return editButton;
   }
@@ -133,8 +141,23 @@ export class AppView {
     this.#addProjectForm.reset();
   }
 
-  #showEditProjectDialog = () => {
+  #onEditProjectButtonClick = (event) => {
+    this.controller.onEditProjectButtonClick(event.currentTarget.dataset.id);
+  }
+
+  showEditProjectDialog = (project) => {
+    this.#editProjectDialog.returnValue = '';
+    AppView.#setFormValues(this.#editProjectForm, project);
     this.#editProjectDialog.showModal();
+  }
+
+  #onEditProjectDialogClose = () => {
+    if (this.#editProjectDialog.returnValue === 'submit') {
+      const project = new Project(AppView.#getFormValues(this.#editProjectForm));
+      this.controller.editProject(project);
+    }
+
+    this.#editProjectForm.reset();
   }
 
   #onDeleteProjectButtonClick = (event) => {
@@ -210,5 +233,34 @@ export class AppView {
     }
 
     return values;
+  }
+
+  static #setFormValues(form, values) {
+    for (const el of form.elements) {
+      if (!el.name || !(el.name in values)) {
+        continue;
+      }
+
+      const value = values[el.name];
+
+      switch (el.type) {
+        case 'submit':
+        case 'button':
+        case 'reset':
+          break;
+
+        case 'checkbox':
+          el.checked = Boolean(value);
+          break;
+
+        case 'datetime-local':
+          el.value = value && isValid(value) ? format(value, "yyyy-MM-dd'T'HH:mm") : '';
+          break;
+
+        default:
+          el.value = value ?? '';
+          break;
+      }
+    }
   }
 }
