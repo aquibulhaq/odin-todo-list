@@ -60,6 +60,12 @@ export class AppController {
     this.view.showTodoList(this.model.getAllTodos(this.selectedProjectId));
   }
 
+  onTodoCompletedChange(todoId, completed) {
+    const todo = this.model.getTodoById(this.selectedProjectId, todoId);
+    todo.completed = completed;
+    this.model.putTodo(this.selectedProjectId, todo);
+  }
+
   onDeleteTodoButtonClick(todoId) {
     this.view.showDeleteTodoDialog(this.model.getTodoById(this.selectedProjectId, todoId));
   }

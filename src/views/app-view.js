@@ -130,6 +130,8 @@ export class AppView {
       todoCompleted.classList.add('todo-completed');
       todoCompleted.name = 'completed';
       todoCompleted.checked = todo.completed;
+      todoCompleted.dataset.id = todo.id;
+      todoCompleted.addEventListener('change', this.#onTodoCompletedChange);
       todoLabel.appendChild(todoCompleted);
 
       const todoTitle = document.createElement('h3');
@@ -305,6 +307,11 @@ export class AppView {
     }
 
     this.#editTodoForm.reset();
+  }
+
+  #onTodoCompletedChange = (event) => {
+    const el = event.currentTarget;
+    this.controller.onTodoCompletedChange(el.dataset.id, el.checked);
   }
 
   #onDeleteTodoButtonClick = (event) => {
