@@ -38,6 +38,7 @@ export class AppView {
 
   #editTodoBtns = document.querySelectorAll('.content .edit-button');
   #editTodoDialog = document.getElementById('edit-todo-dialog');
+  #editTodoForm = document.getElementById('edit-todo-form');
 
   #deleteTodoBtns = document.querySelectorAll('.content .delete-button');
   #deleteTodoDialog = document.getElementById('delete-todo-dialog');
@@ -69,8 +70,9 @@ export class AppView {
     this.#addTodoDialog.addEventListener('close', this.#onAddTodoDialogClose);
 
     this.#editTodoBtns.forEach((button) => {
-      button.addEventListener('click', this.#showEditTodoDialog);
+      button.addEventListener('click', this.#onEditTodoButtonClick);
     });
+    this.#editTodoDialog.addEventListener('close', this.#onEditTodoDialogClose);
 
     this.#deleteTodoBtns.forEach(button => {
       button.addEventListener('click', this.#onDeleteTodoButtonClick);
@@ -287,10 +289,22 @@ export class AppView {
   }
 
   #onEditTodoButtonClick = (event) => {
+    this.controller.onEditTodoButtonClick(event.currentTarget.dataset.id);
   }
 
-  #showEditTodoDialog = () => {
+  showEditTodoDialog = (todo) => {
+    this.#editTodoDialog.returnValue = '';
+    AppView.#setFormValues(this.#editTodoForm, todo);
     this.#editTodoDialog.showModal();
+  }
+
+  #onEditTodoDialogClose = () => {
+    if (this.#editTodoDialog.returnValue === 'submit') {
+      const todo = new Todo(AppView.#getFormValues(this.#editTodoForm));
+      this.controller.editTodo(todo);
+    }
+
+    this.#editTodoForm.reset();
   }
 
   #onDeleteTodoButtonClick = (event) => {
