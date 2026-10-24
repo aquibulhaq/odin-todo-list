@@ -55,9 +55,6 @@ export class AppView {
     this.#addProjectBtn.addEventListener('click', this.#showAddProjectDialog);
     this.#addProjectDialog.addEventListener('close', this.#onAddProjectDialogClose);
 
-    this.#editProjectBtns.forEach((button) => {
-      button.addEventListener('click', this.#onEditProjectButtonClick);
-    });
     this.#editProjectDialog.addEventListener('close', this.#onEditProjectDialogClose);
 
     this.#deleteProjectBtns.forEach((button) => {
@@ -69,14 +66,8 @@ export class AppView {
     this.#addTodoBtn.addEventListener('click', this.#showAddTodoDialog);
     this.#addTodoDialog.addEventListener('close', this.#onAddTodoDialogClose);
 
-    this.#editTodoBtns.forEach((button) => {
-      button.addEventListener('click', this.#onEditTodoButtonClick);
-    });
     this.#editTodoDialog.addEventListener('close', this.#onEditTodoDialogClose);
 
-    this.#deleteTodoBtns.forEach(button => {
-      button.addEventListener('click', this.#onDeleteTodoButtonClick);
-    });
     this.#deleteTodoDialog.addEventListener('close', this.#onDeleteTodoDialogClose);
   }
 
