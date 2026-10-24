@@ -12,6 +12,7 @@ import {
 } from '@mdi/js';
 
 import { Project } from '../models/project';
+import { Todo } from '../models/todo';
 
 export class AppView {
   #projectList = document.querySelector('.project-list');
@@ -33,6 +34,7 @@ export class AppView {
 
   #addTodoBtn = document.querySelector('.content .add-button');
   #addTodoDialog = document.getElementById('add-todo-dialog');
+  #addTodoForm = document.getElementById('add-todo-form');
 
   #editTodoBtns = document.querySelectorAll('.content .edit-button');
   #editTodoDialog = document.getElementById('edit-todo-dialog');
@@ -64,6 +66,8 @@ export class AppView {
 
 
     this.#addTodoBtn.addEventListener('click', this.#showAddTodoDialog);
+    this.#addTodoDialog.addEventListener('close', this.#onAddTodoDialogClose);
+
     this.#editTodoBtns.forEach((button) => {
       button.addEventListener('click', this.#showEditTodoDialog);
     });
@@ -269,7 +273,17 @@ export class AppView {
   }
 
   #showAddTodoDialog = () => {
+    this.#addTodoDialog.returnValue = '';
     this.#addTodoDialog.showModal();
+  }
+
+  #onAddTodoDialogClose = () => {
+    if (this.#addTodoDialog.returnValue === 'submit') {
+      const todo = new Todo(AppView.#getFormValues(this.#addTodoForm));
+      this.controller.addTodo(todo);
+    }
+
+    this.#addTodoForm.reset();
   }
 
   #onEditTodoButtonClick = (event) => {
